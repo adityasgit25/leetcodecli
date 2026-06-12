@@ -1,0 +1,25 @@
+Profile Summary
++--------------+-------------------------------+
+| FIELD        | VALUE                         |
++--------------+-------------------------------+
+| Username     | alice                         |
+| Display Name | Alice Example                 |
+| Ranking      | 123                           |
+| Reputation   | 7                             |
+| Profile URL  | https://leetcode.com/u/alice/ |
++--------------+-------------------------------+
+
+Total Solved Count
++--------------+-------+
+| METRIC       | COUNT |
++--------------+-------+
+| Total Solved | 42    |
++--------------+-------+
+
+Language Breakdown
++----------+--------+
+| LANGUAGE | SOLVED |
++----------+--------+
+| Go       | 10     |
+| Python3  | 32     |
++----------+--------+
