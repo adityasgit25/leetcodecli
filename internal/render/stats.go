@@ -6,7 +6,7 @@ import (
 
 	"github.com/jedib0t/go-pretty/v6/table"
 
-	"leetcodecli/internal/leetcode"
+	"github.com/adityasgit25/leetcodecli/internal/leetcode"
 )
 
 const minValueWidth = 12

@@ -1,4 +1,4 @@
-module leetcodecli
+module github.com/adityasgit25/leetcodecli
 
 go 1.26.4
 

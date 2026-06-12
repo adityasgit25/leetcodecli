@@ -6,7 +6,7 @@ import (
 	"strings"
 	"testing"
 
-	"leetcodecli/internal/leetcode"
+	"github.com/adityasgit25/leetcodecli/internal/leetcode"
 )
 
 func TestRenderStatsGoldenOutput(t *testing.T) {

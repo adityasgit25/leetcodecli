@@ -7,7 +7,7 @@ import (
 	"strings"
 	"testing"
 
-	"leetcodecli/internal/leetcode"
+	"github.com/adityasgit25/leetcodecli/internal/leetcode"
 )
 
 const missingUsernameMessage = "Username required. Usage: leetcode stats <username>. Run \"leetcode help\" for help."

@@ -7,8 +7,8 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"leetcodecli/internal/leetcode"
-	statsrender "leetcodecli/internal/render"
+	"github.com/adityasgit25/leetcodecli/internal/leetcode"
+	statsrender "github.com/adityasgit25/leetcodecli/internal/render"
 )
 
 type statsFetcher func(context.Context, string) (leetcode.ProfileStats, error)
