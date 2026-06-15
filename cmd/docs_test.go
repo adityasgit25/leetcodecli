@@ -80,17 +80,6 @@ func TestInstallationDocsDescribeReleaseReadiness(t *testing.T) {
 				t.Fatalf("installation docs missing %q", required)
 			}
 		}
-<<<<<<< HEAD
-		if strings.Contains(content, "leetcodecli") {
-			t.Fatalf("installation docs use internal module name: %s", content)
-		}
-	}
-
-	if _, err := os.Stat(filepath.Join("..", ".goreleaser.yaml")); err == nil {
-		t.Fatal(".goreleaser.yaml exists, but release packaging is not scoped")
-	} else if !os.IsNotExist(err) {
-		t.Fatalf("stat .goreleaser.yaml: %v", err)
-=======
 		for _, forbiddenCommand := range []string{
 			"leetcodecli help",
 			"leetcodecli stats",
@@ -192,7 +181,6 @@ func TestPublicInstallationDocsDescribeValidatedReleaseFlow(t *testing.T) {
 		if !strings.Contains(validation, required) {
 			t.Fatalf("release validation note missing %q", required)
 		}
->>>>>>> release-code
 	}
 }
 

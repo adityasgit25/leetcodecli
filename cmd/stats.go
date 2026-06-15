@@ -4,10 +4,7 @@ import (
 	"context"
 	"fmt"
 	"io"
-<<<<<<< HEAD
-=======
 	"strings"
->>>>>>> release-code
 
 	"github.com/spf13/cobra"
 
@@ -17,11 +14,7 @@ import (
 
 type statsFetcher func(context.Context, string) (leetcode.ProfileStats, error)
 
-<<<<<<< HEAD
-type statsRenderer func(leetcode.ProfileStats) (string, error)
-=======
 type statsRenderer func(leetcode.ProfileStats, io.Writer) (string, error)
->>>>>>> release-code
 
 type statsCommandConfig struct {
 	fetch  statsFetcher
@@ -40,13 +33,8 @@ func NewStatsCommand() *cobra.Command {
 	client := leetcode.NewClient()
 	return newStatsCommand(statsCommandConfig{
 		fetch: client.FetchProfileStats,
-<<<<<<< HEAD
-		render: func(stats leetcode.ProfileStats) (string, error) {
-			return statsrender.RenderStatsWithWidthDetector(stats, statsrender.DetectTerminalWidth)
-=======
 		render: func(stats leetcode.ProfileStats, output io.Writer) (string, error) {
 			return statsrender.RenderStatsWithWidthDetector(stats, statsrender.DetectWriterWidth(output))
->>>>>>> release-code
 		},
 	})
 }
@@ -70,21 +58,13 @@ func newStatsCommand(config statsCommandConfig) *cobra.Command {
 				return mapStatsFetchError(username, err)
 			}
 
-<<<<<<< HEAD
-			output, err := config.render(stats)
-=======
 			outputWriter := command.OutOrStdout()
 			output, err := config.render(stats, outputWriter)
->>>>>>> release-code
 			if err != nil {
 				return renderFailureError()
 			}
 
-<<<<<<< HEAD
-			_, err = io.WriteString(command.OutOrStdout(), output)
-=======
 			_, err = io.WriteString(outputWriter, output)
->>>>>>> release-code
 			if err != nil {
 				return renderFailureError()
 			}
@@ -100,11 +80,7 @@ func (config statsCommandConfig) withDefaults() statsCommandConfig {
 		}
 	}
 	if config.render == nil {
-<<<<<<< HEAD
-		config.render = func(leetcode.ProfileStats) (string, error) {
-=======
 		config.render = func(leetcode.ProfileStats, io.Writer) (string, error) {
->>>>>>> release-code
 			return "", nil
 		}
 	}
@@ -140,12 +116,9 @@ func validateStatsUsername(_ *cobra.Command, args []string) error {
 	if len(args) != 1 {
 		return usageError{message: `Usage: leetcode stats <username>. Run "leetcode help" for help.`}
 	}
-<<<<<<< HEAD
-=======
 	args[0] = strings.TrimSpace(args[0])
 	if args[0] == "" {
 		return usageError{message: `Username required. Usage: leetcode stats <username>. Run "leetcode help" for help.`}
 	}
->>>>>>> release-code
 	return nil
 }

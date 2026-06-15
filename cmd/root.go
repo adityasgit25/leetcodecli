@@ -5,10 +5,7 @@ import (
 	"fmt"
 	"io"
 	"os"
-<<<<<<< HEAD
-=======
 	"strings"
->>>>>>> release-code
 
 	"github.com/spf13/cobra"
 )
@@ -68,13 +65,10 @@ func run(command *cobra.Command, args []string, stdout io.Writer, stderr io.Writ
 			_, _ = fmt.Fprintln(stderr, usage.Error())
 			return exitCodeUsage
 		}
-<<<<<<< HEAD
-=======
 		if isCobraUsageError(err) {
 			_, _ = fmt.Fprintln(stderr, err)
 			return exitCodeUsage
 		}
->>>>>>> release-code
 
 		_, _ = fmt.Fprintln(stderr, err)
 		return exitCodeError
@@ -82,8 +76,6 @@ func run(command *cobra.Command, args []string, stdout io.Writer, stderr io.Writ
 
 	return exitCodeOK
 }
-<<<<<<< HEAD
-=======
 
 func isCobraUsageError(err error) bool {
 	if err == nil {
@@ -95,4 +87,3 @@ func isCobraUsageError(err error) bool {
 		strings.HasPrefix(message, "unknown flag:") ||
 		strings.HasPrefix(message, "flag needs an argument:")
 }
->>>>>>> release-code

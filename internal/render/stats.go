@@ -5,10 +5,7 @@ import (
 	"strings"
 
 	"github.com/jedib0t/go-pretty/v6/table"
-<<<<<<< HEAD
-=======
 	"github.com/mattn/go-runewidth"
->>>>>>> release-code
 
 	"github.com/adityasgit25/leetcodecli/internal/leetcode"
 )
@@ -89,18 +86,8 @@ func languageNameWidth(width int) int {
 }
 
 func fit(value string, maxWidth int) string {
-<<<<<<< HEAD
-	if maxWidth <= 0 || len(value) <= maxWidth {
-		return value
-	}
-	if maxWidth <= 3 {
-		return value[:maxWidth]
-	}
-	return value[:maxWidth-3] + "..."
-=======
 	if maxWidth <= 0 || runewidth.StringWidth(value) <= maxWidth {
 		return value
 	}
 	return runewidth.Truncate(value, maxWidth, "...")
->>>>>>> release-code
 }

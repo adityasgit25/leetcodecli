@@ -20,40 +20,17 @@ Bare `leetcode stats` is a usage error because v1 requires an explicit username.
 
 ## Installation
 
-<<<<<<< HEAD
-Supported OSes are Windows, macOS, and Linux. Public release artifacts may not exist yet; the intended public executable name is `leetcode`.
-=======
 Supported OSes are Windows, macOS, and Linux. Public releases are built by GoReleaser from tagged source revisions, and the public executable name is `leetcode`.
->>>>>>> release-code
 
 macOS Homebrew release path:
 
 ```text
-<<<<<<< HEAD
-brew install <tap>/leetcode
-=======
 brew install --cask adityasgit25/leetcodecli/leetcode
->>>>>>> release-code
 leetcode help
 ```
 
 Windows release path:
 
-<<<<<<< HEAD
-1. Download the Windows binary archive and checksum from GitHub Releases.
-2. Verify the checksum before running the binary.
-3. Place `leetcode.exe` in a directory on PATH.
-4. Run `leetcode help`, `leetcode help stats`, or `leetcode stats <username>`.
-
-Linux release path:
-
-1. Download the Linux binary archive and checksum from GitHub Releases.
-2. Verify the checksum before running the binary.
-3. Place `leetcode` in a directory on PATH.
-4. Run `leetcode help`, `leetcode help stats`, or `leetcode stats <username>`.
-
-GoReleaser is the intended packaging path when distribution stories begin. This repository does not require release configuration before packaging is intentionally scoped.
-=======
 1. Download `leetcode_<version>_windows_<arch>.zip` and `checksums.txt` from GitHub Releases for the same version.
 2. Verify the archive against `checksums.txt` before running the binary.
 3. Extract `leetcode.exe`.
@@ -71,7 +48,6 @@ Linux release path:
 GoReleaser produces GitHub Releases archives, checksums, release notes, and the macOS Homebrew cask entry.
 
 Release provenance, versioning, and module-path decisions are documented in [docs/release.md](docs/release.md).
->>>>>>> release-code
 
 ## Scope
 

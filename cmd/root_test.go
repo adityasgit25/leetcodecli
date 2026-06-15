@@ -76,8 +76,6 @@ func TestRootCommandFlagsDoNotExposeUnsupportedSurface(t *testing.T) {
 	}
 }
 
-<<<<<<< HEAD
-=======
 func TestUnknownCommandReturnsUsageExitCode(t *testing.T) {
 	exitCode, stdout, stderr := runCommand(t, "unknown")
 
@@ -106,7 +104,6 @@ func TestUnknownFlagReturnsUsageExitCode(t *testing.T) {
 	}
 }
 
->>>>>>> release-code
 func assertNoForbiddenCommandSurface(t *testing.T, command *cobra.Command) {
 	t.Helper()
 
