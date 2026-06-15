@@ -1,0 +1,11 @@
+# test log
+open testdata\profile_success.json
+open testdata\profile_success.json
+open testdata\profile_missing_total.json
+open testdata\profile_missing_languages.json
+open testdata\profile_empty_languages.json
+open testdata\profile_success.json
+open testdata\profile_not_found.json
+open testdata\graphql_error.json
+open testdata\profile_missing_total.json
+open testdata\profile_missing_languages.json

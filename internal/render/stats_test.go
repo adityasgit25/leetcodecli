@@ -1,12 +1,23 @@
 package render
 
 import (
+<<<<<<< HEAD
+=======
+	"bytes"
+>>>>>>> release-code
 	"os"
 	"path/filepath"
 	"strings"
 	"testing"
+<<<<<<< HEAD
 
 	"github.com/adityasgit25/leetcodecli/internal/leetcode"
+=======
+	"unicode/utf8"
+
+	"github.com/adityasgit25/leetcodecli/internal/leetcode"
+	"github.com/mattn/go-runewidth"
+>>>>>>> release-code
 )
 
 func TestRenderStatsGoldenOutput(t *testing.T) {
@@ -67,6 +78,15 @@ func TestRenderStatsWithWidthDetectorFallsBackTo80Columns(t *testing.T) {
 	}
 }
 
+<<<<<<< HEAD
+=======
+func TestDetectWriterWidthFallsBackForNonFileWriter(t *testing.T) {
+	if got := ResolveWidth(DetectWriterWidth(&bytes.Buffer{})); got != FallbackWidth {
+		t.Fatalf("ResolveWidth(non-file writer) = %d, want %d", got, FallbackWidth)
+	}
+}
+
+>>>>>>> release-code
 func TestResolveWidth(t *testing.T) {
 	if got := ResolveWidth(func() (int, error) { return 120, nil }); got != 120 {
 		t.Fatalf("ResolveWidth success = %d, want 120", got)
@@ -79,6 +99,23 @@ func TestResolveWidth(t *testing.T) {
 	}
 }
 
+<<<<<<< HEAD
+=======
+func TestFitTruncatesUnicodeWithoutInvalidUTF8(t *testing.T) {
+	got := fit("Go语言🙂with-extra-text", 8)
+
+	if !utf8.ValidString(got) {
+		t.Fatalf("fit returned invalid UTF-8: %q", got)
+	}
+	if runewidth.StringWidth(got) > 8 {
+		t.Fatalf("fit width = %d, want <= 8 for %q", runewidth.StringWidth(got), got)
+	}
+	if !strings.HasSuffix(got, "...") {
+		t.Fatalf("fit = %q, want ellipsis suffix", got)
+	}
+}
+
+>>>>>>> release-code
 func sampleStats() leetcode.ProfileStats {
 	return leetcode.ProfileStats{
 		Summary: leetcode.ProfileSummary{

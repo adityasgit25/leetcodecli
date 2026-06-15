@@ -4,6 +4,10 @@ import (
 	"bytes"
 	"context"
 	"errors"
+<<<<<<< HEAD
+=======
+	"io"
+>>>>>>> release-code
 	"strings"
 	"testing"
 
@@ -58,7 +62,11 @@ func TestStatsMissingUsernameDoesNotInvokeDependencies(t *testing.T) {
 			fetchCalled++
 			return leetcode.ProfileStats{}, nil
 		},
+<<<<<<< HEAD
 		render: func(leetcode.ProfileStats) (string, error) {
+=======
+		render: func(leetcode.ProfileStats, io.Writer) (string, error) {
+>>>>>>> release-code
 			renderCalled++
 			return "", nil
 		},
@@ -93,7 +101,11 @@ func TestStatsAcceptsExactlyOneUsername(t *testing.T) {
 			fetchedUsername = username
 			return commandStats(username), nil
 		},
+<<<<<<< HEAD
 		render: func(stats leetcode.ProfileStats) (string, error) {
+=======
+		render: func(stats leetcode.ProfileStats, _ io.Writer) (string, error) {
+>>>>>>> release-code
 			renderCalled = true
 			return "Profile Summary\nTotal Solved Count\nLanguage Breakdown\n" + stats.Summary.Username + "\n", nil
 		},
@@ -128,7 +140,11 @@ func TestStatsHappyPathReturnsExitCodeZeroWithInjectedDependencies(t *testing.T)
 		fetch: func(_ context.Context, username string) (leetcode.ProfileStats, error) {
 			return commandStats(username), nil
 		},
+<<<<<<< HEAD
 		render: func(stats leetcode.ProfileStats) (string, error) {
+=======
+		render: func(stats leetcode.ProfileStats, _ io.Writer) (string, error) {
+>>>>>>> release-code
 			return "Profile Summary\nTotal Solved Count\nLanguage Breakdown\n" + stats.Summary.ProfileURL + "\n", nil
 		},
 	})
@@ -151,6 +167,48 @@ func TestStatsHappyPathReturnsExitCodeZeroWithInjectedDependencies(t *testing.T)
 	}
 }
 
+<<<<<<< HEAD
+=======
+func TestStatsRejectsBlankUsername(t *testing.T) {
+	exitCode, stdout, stderr := runCommand(t, "stats", "   ")
+
+	if exitCode != 2 {
+		t.Fatalf("exitCode = %d, want 2", exitCode)
+	}
+	if stdout != "" {
+		t.Fatalf("stdout = %q, want empty", stdout)
+	}
+	if stderr != missingUsernameMessage+"\n" {
+		t.Fatalf("stderr = %q, want %q", stderr, missingUsernameMessage+"\n")
+	}
+}
+
+func TestStatsTrimsUsernameBeforeFetching(t *testing.T) {
+	fetchedUsername := ""
+	command := newStatsCommand(statsCommandConfig{
+		fetch: func(_ context.Context, username string) (leetcode.ProfileStats, error) {
+			fetchedUsername = username
+			return commandStats(username), nil
+		},
+		render: func(leetcode.ProfileStats, io.Writer) (string, error) {
+			return "ok", nil
+		},
+	})
+	var stdout bytes.Buffer
+	var stderr bytes.Buffer
+	command.SetOut(&stdout)
+	command.SetErr(&stderr)
+	command.SetArgs([]string{" alice "})
+
+	if err := command.Execute(); err != nil {
+		t.Fatalf("Execute returned error: %v", err)
+	}
+	if fetchedUsername != "alice" {
+		t.Fatalf("fetched username = %q, want alice", fetchedUsername)
+	}
+}
+
+>>>>>>> release-code
 func TestStatsRejectsExtraArgumentsAsUsageError(t *testing.T) {
 	exitCode, stdout, stderr := runCommand(t, "stats", "alice", "bob")
 
@@ -219,7 +277,11 @@ func TestStatsFailureMappings(t *testing.T) {
 					}
 					return commandStats(username), nil
 				},
+<<<<<<< HEAD
 				render: func(leetcode.ProfileStats) (string, error) {
+=======
+				render: func(leetcode.ProfileStats, io.Writer) (string, error) {
+>>>>>>> release-code
 					renderCalled = true
 					if tt.renderErr != nil {
 						return "", tt.renderErr

@@ -1,0 +1,4 @@
+# test log
+open testdata\stats_success_80.golden
+open testdata\stats_long_values_80.golden
+open testdata\stats_empty_languages_80.golden

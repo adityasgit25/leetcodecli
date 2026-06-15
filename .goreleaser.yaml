@@ -1,0 +1,96 @@
+version: 2
+
+project_name: leetcode
+
+builds:
+  - id: leetcode
+    main: .
+    binary: leetcode
+    env:
+      - CGO_ENABLED=0
+    goos:
+      - windows
+      - darwin
+      - linux
+    goarch:
+      - amd64
+      - arm64
+    ldflags:
+      - -s -w -X main.version={{ .Version }} -X main.commit={{ .Commit }} -X main.date={{ .Date }}
+
+archives:
+  - id: release-archives
+    ids:
+      - leetcode
+    name_template: "leetcode_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
+    formats:
+      - tar.gz
+    format_overrides:
+      - goos: windows
+        format: zip
+    files:
+      - README.md
+      - docs/installation.md
+      - docs/limitations.md
+      - docs/release.md
+      - docs/usage.md
+
+checksum:
+  name_template: checksums.txt
+  algorithm: sha256
+
+homebrew_casks:
+  - name: leetcode
+    ids:
+      - release-archives
+    binaries:
+      - leetcode
+    repository:
+      owner: adityasgit25
+      name: homebrew-leetcodecli
+      branch: main
+      token: "{{ .Env.HOMEBREW_TAP_GITHUB_TOKEN }}"
+    directory: Casks
+    commit_msg_template: "Brew cask update for {{ .ProjectName }} version {{ .Tag }}"
+    homepage: "https://github.com/adityasgit25/leetcodecli"
+    description: "Terminal CLI for public LeetCode profile statistics."
+    caveats: |
+      Run `leetcode help` after installation.
+    hooks:
+      post:
+        install: |
+          system_command "#{staged_path}/leetcode", args: ["help"]
+
+snapshot:
+  version_template: "{{ incpatch .Version }}-snapshot"
+
+changelog:
+  sort: asc
+
+release:
+  github:
+    owner: adityasgit25
+    name: leetcodecli
+  ids:
+    - release-archives
+  mode: replace
+  header: |
+    ## LeetcodeCLI {{ .Tag }}
+
+    Version: {{ .Tag }}
+
+    Supported operating systems: Windows, macOS, and Linux.
+
+    Public executable: `leetcode`.
+
+    Verify downloaded GitHub Releases archives with `checksums.txt` before placing `leetcode` or `leetcode.exe` on PATH.
+
+    Breaking command behavior: list any command name, argument meaning, output section name, or no-auth behavior change here before publication. Use "None" for patch releases with no breaking change.
+  footer: |
+    ## v1 Trust Boundaries
+
+    LeetcodeCLI is unofficial and depends on public LeetCode data.
+
+    v1 stores no credentials, tokens, cookies, Session Data, or config files.
+
+    Out of scope for v1: login, logout, own-profile default lookup, private LeetCode data, JSON output, CSV output, dashboards, recommendations, goals, reminders, topic-gap analysis, browser extensions, desktop UI, web apps, and TUI features.

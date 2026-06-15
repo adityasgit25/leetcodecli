@@ -80,6 +80,7 @@ func TestInstallationDocsDescribeReleaseReadiness(t *testing.T) {
 				t.Fatalf("installation docs missing %q", required)
 			}
 		}
+<<<<<<< HEAD
 		if strings.Contains(content, "leetcodecli") {
 			t.Fatalf("installation docs use internal module name: %s", content)
 		}
@@ -89,6 +90,109 @@ func TestInstallationDocsDescribeReleaseReadiness(t *testing.T) {
 		t.Fatal(".goreleaser.yaml exists, but release packaging is not scoped")
 	} else if !os.IsNotExist(err) {
 		t.Fatalf("stat .goreleaser.yaml: %v", err)
+=======
+		for _, forbiddenCommand := range []string{
+			"leetcodecli help",
+			"leetcodecli stats",
+			"`leetcodecli`",
+		} {
+			if strings.Contains(content, forbiddenCommand) {
+				t.Fatalf("installation docs use module path as executable command %q: %s", forbiddenCommand, content)
+			}
+		}
+	}
+
+	if _, err := os.Stat(filepath.Join("..", ".goreleaser.yaml")); err != nil {
+		t.Fatalf("release packaging is scoped, but .goreleaser.yaml is unavailable: %v", err)
+	}
+}
+
+func TestReleaseProvenanceDocsDescribeVersioningAndTrustBoundaries(t *testing.T) {
+	release := readProjectFile(t, filepath.Join("docs", "release.md"))
+
+	for _, required := range []string{
+		"source revision",
+		"version tag",
+		"NO_VCS",
+		"uncommitted source state",
+		"release notes",
+		"github.com/adityasgit25/leetcodecli",
+		"module path",
+		"SemVer",
+		"vMAJOR.MINOR.PATCH",
+		"leetcode",
+		"unofficial",
+		"public LeetCode data",
+		"stores no credentials, tokens, cookies, Session Data, or config files",
+		"login",
+		"logout",
+		"own-profile default lookup",
+		"JSON output",
+		"CSV",
+		"dashboards",
+		"recommendations",
+		"goals",
+		"reminders",
+		"topic-gap analysis",
+	} {
+		if !strings.Contains(release, required) {
+			t.Fatalf("docs/release.md missing %q", required)
+		}
+	}
+}
+
+func TestPublicInstallationDocsDescribeValidatedReleaseFlow(t *testing.T) {
+	readme := readProjectFile(t, "README.md")
+	install := readProjectFile(t, filepath.Join("docs", "installation.md"))
+	validation := readProjectFile(t, filepath.Join("docs", "release-validation.md"))
+
+	for _, content := range []string{readme, install} {
+		for _, required := range []string{
+			"brew install --cask adityasgit25/leetcodecli/leetcode",
+			"GitHub Releases",
+			"checksums.txt",
+			"PATH",
+			"leetcode_<version>_windows_<arch>.zip",
+			"leetcode_<version>_linux_<arch>.tar.gz",
+		} {
+			if !strings.Contains(content, required) {
+				t.Fatalf("public installation docs missing %q", required)
+			}
+		}
+		for _, forbidden := range []string{
+			"may not exist yet",
+			"intended Windows path",
+			"intended Linux path",
+			"intended macOS path",
+			"<tap>",
+		} {
+			if strings.Contains(content, forbidden) {
+				t.Fatalf("public installation docs still contain future or placeholder wording %q", forbidden)
+			}
+		}
+	}
+
+	for _, required := range []string{
+		"v1.0.0",
+		"leetcode_1.0.0_windows_amd64.zip",
+		"leetcode_1.0.0_linux_amd64.tar.gz",
+		"checksums.txt",
+		"Get-FileHash -Algorithm SHA256",
+		"sha256sum -c checksums.txt",
+		"Expand-Archive",
+		"tar -xzf",
+		"leetcode help",
+		"leetcode help stats",
+		"GoReleaser unavailable",
+		"Homebrew unavailable",
+		"not published",
+		"HOMEBREW_TAP_GITHUB_TOKEN",
+		"stores no credentials, tokens, cookies, Session Data, or config files",
+	} {
+		if !strings.Contains(validation, required) {
+			t.Fatalf("release validation note missing %q", required)
+		}
+>>>>>>> release-code
 	}
 }
 

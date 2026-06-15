@@ -76,6 +76,37 @@ func TestRootCommandFlagsDoNotExposeUnsupportedSurface(t *testing.T) {
 	}
 }
 
+<<<<<<< HEAD
+=======
+func TestUnknownCommandReturnsUsageExitCode(t *testing.T) {
+	exitCode, stdout, stderr := runCommand(t, "unknown")
+
+	if exitCode != 2 {
+		t.Fatalf("exitCode = %d, want 2", exitCode)
+	}
+	if stdout != "" {
+		t.Fatalf("stdout = %q, want empty", stdout)
+	}
+	if !strings.Contains(stderr, "unknown command") {
+		t.Fatalf("stderr = %q, want unknown command guidance", stderr)
+	}
+}
+
+func TestUnknownFlagReturnsUsageExitCode(t *testing.T) {
+	exitCode, stdout, stderr := runCommand(t, "--definitely-not-supported")
+
+	if exitCode != 2 {
+		t.Fatalf("exitCode = %d, want 2", exitCode)
+	}
+	if stdout != "" {
+		t.Fatalf("stdout = %q, want empty", stdout)
+	}
+	if !strings.Contains(stderr, "unknown flag") {
+		t.Fatalf("stderr = %q, want unknown flag guidance", stderr)
+	}
+}
+
+>>>>>>> release-code
 func assertNoForbiddenCommandSurface(t *testing.T, command *cobra.Command) {
 	t.Helper()
 

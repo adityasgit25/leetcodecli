@@ -1,0 +1,11 @@
+# test log
+open ..\.github\workflows\ci.yml
+open ..\README.md
+open ..\docs\usage.md
+open ..\docs\limitations.md
+open ..\docs\installation.md
+open ..\docs\installation.md
+open ..\README.md
+stat ..\.goreleaser.yaml
+open ..\docs\release.md
+open ..\README.md

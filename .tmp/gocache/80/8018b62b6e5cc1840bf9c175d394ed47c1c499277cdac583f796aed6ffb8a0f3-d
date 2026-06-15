@@ -1,0 +1,8 @@
+./root.go
+./stats.go
+./ci_test.go
+./command_test.go
+./docs_test.go
+./release_config_test.go
+./root_test.go
+./stats_test.go

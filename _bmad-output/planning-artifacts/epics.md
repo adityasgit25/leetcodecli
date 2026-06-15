@@ -99,7 +99,11 @@ No UX Design document was provided or found for this workflow run, so no separat
 
 ### FR Coverage Map
 
+<<<<<<< HEAD
 FR1: Epic 1 and Epic 3 - Epic 1 covers local runnable executable behavior; Epic 3 covers supported install/run validation across Windows, macOS, and Linux.
+=======
+FR1: Epic 1, Epic 3, and Epic 4 - Epic 1 covers local runnable executable behavior; Epic 3 covers supported install/run guidance and CI validation; Epic 4 covers packaged release artifacts and install validation across Windows, macOS, and Linux.
+>>>>>>> release-code
 
 FR2: Epic 1 - CLI help and stats command discovery.
 
@@ -123,9 +127,15 @@ FR11: Epic 2 - terminal width resilience.
 
 FR12: Epic 1 and Epic 2 - Epic 1 covers no structured-output/config/auth surface in help or usage behavior; Epic 2 covers human-readable stats output with no JSON, CSV, or export flags.
 
+<<<<<<< HEAD
 FR13: Epic 3 - installation, usage, and limitations documentation.
 
 FR14: Epic 3 - trust, unofficial status, no credential/session storage, public-data dependency, and supported operating systems.
+=======
+FR13: Epic 3 and Epic 4 - Epic 3 covers installation, usage, and limitations documentation; Epic 4 aligns that documentation with real release artifacts, checksums, Homebrew, and GitHub Releases.
+
+FR14: Epic 3 and Epic 4 - Epic 3 covers trust, unofficial status, no credential/session storage, public-data dependency, and supported operating systems; Epic 4 adds release provenance, checksum verification, and distribution trust signals.
+>>>>>>> release-code
 
 ## Epic List
 
@@ -153,6 +163,17 @@ Users can understand how to install and use LeetcodeCLI safely across supported 
 
 **Implementation notes:** Add or finalize README and usage/limitations documentation, align docs with Cobra help and v1 scope, document supported OSes and public-data failure modes, add cross-platform CI for Windows, macOS, and Linux, and defer GoReleaser packaging until distribution stories intentionally begin.
 
+<<<<<<< HEAD
+=======
+### Epic 4: Release Packaging and Public Distribution
+
+Users can install verified LeetcodeCLI release artifacts through the intended public distribution channels: Homebrew on macOS and checksummed GitHub Releases binaries on Windows and Linux.
+
+**FRs covered:** FR1, FR13, FR14
+
+**Implementation notes:** Establish release provenance before publishing, decide whether the public module path must change before release packaging, add GoReleaser configuration, produce checksummed Windows/macOS/Linux artifacts that preserve the `leetcode` executable name, publish through GitHub Releases and Homebrew, keep v1 trust boundaries intact, and update installation guidance from intended flow to actual release flow.
+
+>>>>>>> release-code
 ## Epic 1: Safe CLI Entry and Stats Command Discovery
 
 Users can run the `leetcode` command, discover `leetcode stats <username>`, and receive safe usage guidance when they invoke the command incorrectly.
@@ -520,3 +541,169 @@ So that I can run LeetcodeCLI on my operating system with minimal setup friction
 **When** release documentation is reviewed
 **Then** it repeats the public-data dependency, unofficial status, supported OSes, and no credential/session/config storage boundary
 **And** it keeps the public executable name `leetcode` consistent.
+<<<<<<< HEAD
+=======
+
+## Epic 4: Release Packaging and Public Distribution
+
+Users can install verified LeetcodeCLI release artifacts through the intended public distribution channels: Homebrew on macOS and checksummed GitHub Releases binaries on Windows and Linux.
+
+### Story 4.1: Establish Release Provenance and Versioning
+
+**Requirements covered:** FR1, FR13, FR14
+
+As a developer user,
+I want LeetcodeCLI releases to come from a traceable source revision and version tag,
+So that I can trust the artifacts I install and understand which v1 behavior they contain.
+
+**Acceptance Criteria:**
+
+**Given** release packaging work begins
+**When** source-control and release metadata are reviewed
+**Then** the project has a documented release provenance approach that identifies the source revision used for each public artifact
+**And** public release artifacts are not published from an untracked or ambiguous source state.
+
+**Given** the project may be published as a public source repository
+**When** release readiness is reviewed
+**Then** the team has explicitly decided whether the Go module path remains `leetcodecli` or changes before release packaging
+**And** any module-path change is completed before GoReleaser artifacts are produced.
+
+**Given** v1 command behavior must remain stable across patch releases
+**When** release versioning is documented
+**Then** the project uses semantic versioning or an equivalent public release convention
+**And** release tags, artifact versions, release notes, and documentation refer to the same version.
+
+**Given** release provenance is established
+**When** `go test ./...` and `go build ./...` are run before packaging
+**Then** both commands complete successfully
+**And** the command surface still exposes only the supported v1 public-profile stats workflow.
+
+### Story 4.2: Configure GoReleaser for Checksummed Cross-Platform Artifacts
+
+**Requirements covered:** FR1, FR13, FR14
+
+As a developer user,
+I want GoReleaser to build LeetcodeCLI artifacts for supported operating systems,
+So that Windows, macOS, and Linux users can install the same tested CLI release.
+
+**Acceptance Criteria:**
+
+**Given** GoReleaser configuration is added
+**When** the release build matrix is inspected
+**Then** it builds supported Windows, macOS, and Linux artifacts
+**And** each artifact preserves the public executable name `leetcode`.
+
+**Given** GitHub Releases binaries are the Windows and Linux distribution path
+**When** GoReleaser packaging runs
+**Then** it produces downloadable archives for Windows and Linux
+**And** it produces checksums that users can verify before installation.
+
+**Given** macOS distribution uses Homebrew
+**When** GoReleaser packaging runs
+**Then** it also produces the macOS artifact inputs required by the Homebrew release path
+**And** it does not introduce unsupported Windows or Linux package-manager distribution for v1.
+
+**Given** release packaging is configured
+**When** a snapshot or dry-run release is executed locally or in CI
+**Then** GoReleaser completes without publishing public artifacts
+**And** the generated artifact names, checksums, and executable names match the documented install flow.
+
+**Given** v1 has strict scope boundaries
+**When** release packaging files are reviewed
+**Then** they do not add config, auth, session, token, browser-login, logout, JSON, CSV, dashboard, recommendation, goal, reminder, topic-gap, browser extension, web app, or TUI features.
+
+### Story 4.3: Publish GitHub Releases from Tagged Builds
+
+**Requirements covered:** FR1, FR13, FR14
+
+As a developer user,
+I want tagged releases to publish checksummed binaries through GitHub Releases,
+So that Windows and Linux installation instructions point to real, verifiable artifacts.
+
+**Acceptance Criteria:**
+
+**Given** a release tag is pushed
+**When** the release workflow runs
+**Then** it executes the required tests and build validation before publishing artifacts
+**And** it fails without publishing if validation does not pass.
+
+**Given** validation passes for a release tag
+**When** GoReleaser publishes to GitHub Releases
+**Then** the release includes Windows, macOS, and Linux artifacts as configured
+**And** it includes checksum files for artifact verification.
+
+**Given** users inspect the GitHub Release
+**When** release notes are reviewed
+**Then** they identify the release version, supported operating systems, executable name `leetcode`, checksum verification expectation, and v1 trust boundaries
+**And** they do not promise authentication, private LeetCode data, JSON/CSV output, dashboards, recommendations, goals, reminders, or other deferred features.
+
+**Given** public command behavior must remain stable
+**When** a release is prepared
+**Then** release notes call out any breaking command behavior changes before publication
+**And** patch releases do not silently change command names, argument meaning, output category names, or no-auth behavior.
+
+### Story 4.4: Publish the macOS Homebrew Distribution Path
+
+**Requirements covered:** FR1, FR13, FR14
+
+As a macOS developer user,
+I want to install LeetcodeCLI through Homebrew,
+So that I can use the expected macOS package-management flow instead of manually unpacking binaries.
+
+**Acceptance Criteria:**
+
+**Given** Homebrew is the intended macOS distribution channel
+**When** release packaging is configured
+**Then** GoReleaser updates the agreed Homebrew tap or formula path for LeetcodeCLI
+**And** the formula installs the executable as `leetcode`.
+
+**Given** a macOS user follows installation guidance
+**When** they run the documented `brew install` command after release publication
+**Then** Homebrew installs LeetcodeCLI successfully
+**And** running `leetcode help` from the installed binary does not crash.
+
+**Given** the Homebrew formula is reviewed
+**When** formula metadata and tests are inspected
+**Then** they reference the correct release version, artifact URL, and checksum
+**And** they do not require credentials, tokens, cookies, Session Data, or config files.
+
+**Given** Homebrew distribution is live
+**When** README and installation docs are reviewed
+**Then** placeholder tap or release commands are replaced with actual published Homebrew instructions
+**And** Windows and Linux guidance continues to use checksummed GitHub Releases binaries.
+
+### Story 4.5: Validate Public Installation and Release Documentation
+
+**Requirements covered:** FR1, FR13, FR14
+
+As a developer user,
+I want release installation instructions to match the published artifacts,
+So that I can install LeetcodeCLI without reading source code or guessing which file to download.
+
+**Acceptance Criteria:**
+
+**Given** a release candidate has been packaged
+**When** install validation runs for Windows, macOS, and Linux
+**Then** each supported operating system has at least one documented install/run path validated against the packaged artifacts
+**And** the installed executable can run help commands without crashing.
+
+**Given** Windows and Linux users install from GitHub Releases
+**When** installation validation follows the documented flow
+**Then** checksum verification is possible before placing the binary on `PATH`
+**And** the docs explain archive extraction and `PATH` setup clearly enough to install without reading source code.
+
+**Given** macOS users install from Homebrew
+**When** installation validation follows the documented flow
+**Then** the `brew install` path works for the published release
+**And** the installed command name remains `leetcode`.
+
+**Given** public release docs are updated
+**When** README, usage, limitations, and installation docs are compared with Cobra help and release notes
+**Then** command examples, supported OSes, unofficial third-party status, public-data dependency, no credential/session/config storage, and no-auth v1 scope remain consistent
+**And** the docs no longer describe release artifacts as merely future or intended if they have been published.
+
+**Given** release validation is complete
+**When** `go test ./...` and `go build ./...` are run
+**Then** both commands pass
+**And** documentation tests, if present, still protect installation guidance, trust boundaries, and release artifact expectations.
+>>>>>>> release-code

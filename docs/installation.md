@@ -2,6 +2,7 @@
 
 LeetcodeCLI supports Windows, macOS, and Linux. The public executable name is `leetcode`.
 
+<<<<<<< HEAD
 Public release artifacts may not exist yet. When distribution stories begin, GoReleaser is the intended packaging path for GitHub Releases binaries and Homebrew distribution. No release configuration is required before that work is intentionally scoped.
 
 ## macOS
@@ -10,6 +11,18 @@ The intended macOS path is Homebrew:
 
 ```text
 brew install <tap>/leetcode
+=======
+Public releases are built by GoReleaser from tagged source revisions. GoReleaser produces GitHub Releases archives, `checksums.txt`, release notes, and the macOS Homebrew cask entry.
+
+Release provenance, versioning, and module-path decisions are documented in [release.md](release.md).
+
+## macOS
+
+Use Homebrew:
+
+```text
+brew install --cask adityasgit25/leetcodecli/leetcode
+>>>>>>> release-code
 leetcode help
 leetcode help stats
 leetcode stats <username>
@@ -17,24 +30,59 @@ leetcode stats <username>
 
 ## Windows
 
+<<<<<<< HEAD
 The intended Windows path is a checksummed binary from GitHub Releases:
 
 1. Download the Windows archive and checksum from GitHub Releases.
 2. Verify the checksum before running the binary.
+=======
+Use a checksummed binary from GitHub Releases:
+
+1. Download `leetcode_<version>_windows_<arch>.zip` and `checksums.txt` from GitHub Releases for the same version.
+2. Verify the archive against `checksums.txt` before running the binary.
+>>>>>>> release-code
 3. Extract `leetcode.exe`.
 4. Place `leetcode.exe` in a directory on PATH.
 5. Run `leetcode help`, `leetcode help stats`, or `leetcode stats <username>`.
 
+<<<<<<< HEAD
 ## Linux
 
 The intended Linux path is a checksummed binary from GitHub Releases:
 
 1. Download the Linux archive and checksum from GitHub Releases.
 2. Verify the checksum before running the binary.
+=======
+PowerShell checksum and extraction example:
+
+```powershell
+Get-FileHash -Algorithm SHA256 .\leetcode_<version>_windows_<arch>.zip
+Select-String -Path .\checksums.txt -Pattern "leetcode_<version>_windows_<arch>.zip"
+Expand-Archive .\leetcode_<version>_windows_<arch>.zip -DestinationPath .\leetcode
+```
+
+## Linux
+
+Use a checksummed binary from GitHub Releases:
+
+1. Download `leetcode_<version>_linux_<arch>.tar.gz` and `checksums.txt` from GitHub Releases for the same version.
+2. Verify the archive against `checksums.txt` before running the binary.
+>>>>>>> release-code
 3. Extract `leetcode`.
 4. Place `leetcode` in a directory on PATH.
 5. Run `leetcode help`, `leetcode help stats`, or `leetcode stats <username>`.
 
+<<<<<<< HEAD
+=======
+Shell checksum and extraction example:
+
+```sh
+sha256sum -c checksums.txt --ignore-missing
+tar -xzf leetcode_<version>_linux_<arch>.tar.gz
+chmod +x leetcode
+```
+
+>>>>>>> release-code
 ## Output
 
 `leetcode stats <username>` renders human-readable output with:
