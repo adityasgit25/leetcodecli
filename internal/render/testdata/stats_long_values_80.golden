@@ -1,0 +1,25 @@
+Profile Summary
++--------------+------------------------------------------------------+
+| FIELD        | VALUE                                                |
++--------------+------------------------------------------------------+
+| Username     | a-very-long-leetcode-username-that-still-needs-a-... |
+| Display Name | N/A                                                  |
+| Ranking      | N/A                                                  |
+| Reputation   | N/A                                                  |
+| Profile URL  | https://leetcode.com/u/a-very-long-leetcode-usern... |
++--------------+------------------------------------------------------+
+
+Total Solved Count
++--------------+-------+
+| METRIC       | COUNT |
++--------------+-------+
+| Total Solved | 1234  |
++--------------+-------+
+
+Language Breakdown
++------------------------------------+--------+
+| LANGUAGE                           | SOLVED |
++------------------------------------+--------+
+| TypeScriptWithExtraLongRuntimeName | 333    |
+| C++                                | 222    |
++------------------------------------+--------+

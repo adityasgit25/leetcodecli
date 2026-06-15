@@ -1,0 +1,7 @@
+./client.go
+./errors.go
+./graphql.go
+./normalize.go
+./types.go
+./client_test.go
+./normalize_test.go

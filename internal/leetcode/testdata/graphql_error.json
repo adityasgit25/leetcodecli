@@ -1,0 +1,10 @@
+{
+  "errors": [
+    {
+      "message": "resolver failed"
+    }
+  ],
+  "data": {
+    "matchedUser": null
+  }
+}

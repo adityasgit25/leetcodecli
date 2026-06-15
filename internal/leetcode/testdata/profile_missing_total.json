@@ -1,0 +1,27 @@
+{
+  "data": {
+    "matchedUser": {
+      "username": "alice",
+      "profile": {
+        "realName": "Alice Example",
+        "ranking": 123,
+        "reputation": 7
+      },
+      "submitStatsGlobal": {
+        "acSubmissionNum": [
+          {
+            "difficulty": "Easy",
+            "count": 20,
+            "submissions": 40
+          }
+        ]
+      },
+      "languageProblemCount": [
+        {
+          "languageName": "Go",
+          "problemsSolved": 10
+        }
+      ]
+    }
+  }
+}

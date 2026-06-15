@@ -1,0 +1,22 @@
+# test log
+open ..\.github\workflows\ci.yml
+open ..\README.md
+open ..\docs\usage.md
+open ..\docs\limitations.md
+open ..\docs\installation.md
+open ..\docs\installation.md
+open ..\README.md
+stat ..\.goreleaser.yaml
+open ..\docs\release.md
+open ..\README.md
+open ..\docs\installation.md
+open ..\docs\release-validation.md
+open ..\README.md
+open ..\.goreleaser.yaml
+open ..\.goreleaser.yaml
+open ..\.github\workflows\release.yml
+open ..\README.md
+open ..\docs\installation.md
+open ..\.github\workflows\release.yml
+open ..\docs\release-notes-template.md
+open ..\.goreleaser.yaml
