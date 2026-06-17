@@ -56,10 +56,6 @@ homebrew_casks:
     description: "Terminal CLI for public LeetCode profile statistics."
     caveats: |
       Run `leetcode help` after installation.
-    hooks:
-      post:
-        install: |
-          system_command "#{staged_path}/leetcode", args: ["help"]
 
 snapshot:
   version_template: "{{ incpatch .Version }}-snapshot"
@@ -73,6 +69,7 @@ release:
     name: leetcodecli
   ids:
     - release-archives
+  replace_existing_artifacts: true
   mode: replace
   header: |
     ## LeetcodeCLI {{ .Tag }}

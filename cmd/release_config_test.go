@@ -82,11 +82,15 @@ func TestHomebrewCaskDistributionPathIsConfigured(t *testing.T) {
 		"directory: Casks",
 		"homepage: \"https://github.com/adityasgit25/leetcodecli\"",
 		"description:",
-		"system_command \"#{staged_path}/leetcode\", args: [\"help\"]",
+		"Run `leetcode help` after installation.",
 	} {
 		if !strings.Contains(config, required) {
 			t.Fatalf(".goreleaser.yaml missing Homebrew cask config %q", required)
 		}
+	}
+
+	if strings.Contains(config, "system_command") {
+		t.Fatal(".goreleaser.yaml should not execute the unsigned binary during Homebrew cask install")
 	}
 
 	if !strings.Contains(workflow, "HOMEBREW_TAP_GITHUB_TOKEN: ${{ secrets.HOMEBREW_TAP_GITHUB_TOKEN }}") {
